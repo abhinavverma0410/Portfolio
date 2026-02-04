@@ -1,23 +1,17 @@
-import dash
 from dash import html
 import dash_bootstrap_components as dbc
 
 def create_hero():
     layout = dbc.Container([
-        # ML PORTFOLIO Heading (Already centered)
+        
         dbc.Row([
             dbc.Col([
-                html.H1("ML PORTFOLIO", 
-                        className="display-4 fw-bold text-center",
-                        style={
-                            "letterSpacing": "4px",
-                            "marginBottom": "2rem",
-                            "fontWeight": "700"
-                        })
+                html.Div([
+                    html.Span("ML PORTFOLIO", className="section-header d-inline-block"),
+                ], className="text-center mb-5")
             ], width=12)
-        ], className="mb-4"),
+        ]),
         
-        # Content Row - Single Column, Centered
         dbc.Row([
             dbc.Col([
                 html.H1(["Hi, I'm ", html.B("Abhinav Verma")], 
@@ -33,7 +27,7 @@ def create_hero():
                     "Skilled in Python, scikit-learn, and API integration. "
                     "Proven ability to build end-to-end ML pipelines and derive actionable insights from data.",
                     className="mb-5 text-center px-4",
-                    style={"maxWidth": "800px", "marginLeft": "auto", "marginRight": "auto"} # Constrain width for readability
+                    style={"maxWidth": "800px", "marginLeft": "auto", "marginRight": "auto"}
                 ),
                 
                 html.Div([
@@ -55,8 +49,6 @@ def create_hero():
                 
             ], width=12, className="d-flex flex-column justify-content-center"),
             
-            # REMOVED: The second column (Image) is deleted completely.
-            
-        ], className="align-items-center py-5")
-    ], fluid=True, id="hero-section", className="px-3 px-md-5")
+        ], className="align-items-center pb-5")
+    ], fluid=True, id="hero-section", className="px-3 px-md-5", style={"paddingTop": "120px"})
     return layout
