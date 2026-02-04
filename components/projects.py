@@ -40,7 +40,7 @@ def create_projects():
                     src=project["image"], 
                     top=True, 
                     className="img-fluid", 
-                    style={
+                    style = {
                         "maxHeight": "300px",
                         "width": "100%",
                         "objectFit": "cover"
