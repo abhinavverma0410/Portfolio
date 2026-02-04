@@ -39,8 +39,10 @@ def create_projects():
                 dbc.CardImg(
                     src=project["image"], 
                     top=True, 
+                    className="img-fluid", 
                     style={
-                        "height": "300px",
+                        "maxHeight": "300px",
+                        "width": "100%",
                         "objectFit": "cover"
                     }
                 ),
