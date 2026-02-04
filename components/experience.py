@@ -6,12 +6,9 @@ def create_experience():
         return dbc.Card([
             dbc.CardBody([
                 html.Div([
-                    # Date
                     html.H6(date, className="text-secondary mb-2 text-uppercase fw-bold small"),
-                    # Role & Company
                     html.H4(role, className="card-title fw-bold mb-1"),
                     html.H5(f"{company} | {location}", className="text-muted mb-3 h6"),
-                    # Description
                     html.P(description, className="card-text text-secondary")
                 ], className="ms-3") 
             ])
@@ -42,7 +39,6 @@ def create_experience():
     ]
 
     layout = dbc.Container([
-        # Header with thin faded gray line
         html.Div([
             html.Span("EXPERIENCE & TRAINING", className="section-header d-inline-block"),
         ], className="text-center mb-5"),
