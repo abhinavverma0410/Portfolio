@@ -171,3 +171,23 @@ html {
         padding: 0.3rem !important;
     }
 }
+
+/* Prevent horizontal overflow on the whole project section */
+#projects-section {
+    overflow-x: hidden;
+}
+
+/* Force all images to be responsive globally */
+.card-img-top {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 250px; /* Slightly shorter for mobile looks better */
+    object-fit: cover;
+}
+
+/* On desktop, keep your preferred height */
+@media (min-width: 768px) {
+    .card-img-top {
+        max-height: 300px;
+    }
+}
