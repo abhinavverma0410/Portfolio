@@ -1,3 +1,9 @@
+/* ================= GLOBAL ================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
@@ -7,51 +13,75 @@ body {
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-#hero-section, #experience-section, #skills-section, #projects-section, #contact-section {
+#hero-section,
+#experience-section,
+#skills-section,
+#projects-section,
+#contact-section {
     scroll-margin-top: 70px;
 }
 
+/* ================= NAVBAR BASE ================= */
+
 .navbar {
-    padding: 0.5rem 0 !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
 }
 
 .navbar .container-fluid {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
 }
+
+.navbar-brand {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 1.25rem !important;
+}
+
+.brand-text {
+    letter-spacing: 2px;
+    color: white;
+}
+
+/* ================= NAVBAR NAV ================= */
 
 .navbar-nav {
     display: flex !important;
-    flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 2.5rem !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    gap: 2.5rem !important;
 }
 
 .navbar-nav .nav-item {
     margin: 0 !important;
 }
 
+/* ================= NAV LINKS ================= */
+
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.4) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
     text-decoration: none;
     font-weight: 600 !important;
     font-size: 1.1rem;
     letter-spacing: 1px;
+    text-transform: uppercase;
     padding: 0.5rem 0 !important;
     margin: 0 1rem;
     position: relative;
-    transition: all 0s ease;
-    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffffff !important;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -61,14 +91,34 @@ html {
     text-decoration-thickness: 2px;
 }
 
-@keyframes glow-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+/* ================= NAVBAR TOGGLER ================= */
+
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    z-index: 11;
+    background-color: transparent !important;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: #ffffff !important;
+.navbar-toggler:focus {
+    box-shadow: none !important;
+    outline: none !important;
 }
+
+.navbar-toggler[aria-expanded="true"],
+.navbar-toggler:not(.collapsed) {
+    background-color: #ffffff !important;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon,
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+    filter: invert(1) grayscale(1) brightness(0) !important;
+}
+
+/* ================= SECTIONS ================= */
 
 .section-header {
     font-size: 2.2rem !important;
@@ -85,6 +135,18 @@ html {
     position: relative;
 }
 
+#hero-section .display-4 {
+    font-weight: 700 !important;
+    letter-spacing: 4px !important;
+    text-transform: uppercase;
+    text-align: center !important;
+    color: #333 !important;
+    margin-bottom: 1.5rem !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ================= EXPERIENCE ================= */
+
 .experience-card {
     border-left: 4px solid #000 !important;
     transition: all 0.3s ease;
@@ -95,6 +157,21 @@ html {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.08) !important;
 }
+
+/* ================= PROJECTS ================= */
+
+#projects-section {
+    overflow-x: hidden;
+}
+
+.card-img-top {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+/* ================= FOOTER ================= */
 
 .footer-link {
     color: #ffffff !important;
@@ -110,27 +187,18 @@ html {
     text-underline-offset: 4px;
 }
 
-#hero-section .display-4 {
-    font-weight: 700 !important;
-    letter-spacing: 4px !important;
-    text-transform: uppercase;
-    text-align: center !important;
-    color: #333 !important;
-    margin-bottom: 1.5rem !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-}
+/* ================= RESPONSIVE ================= */
 
-/*Responsive Behaviour */
 @media (max-width: 992px) {
     .navbar-nav {
         gap: 1.5rem !important;
     }
-    
+
     .navbar-dark .navbar-nav .nav-link {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin: 0 0.5rem;
     }
-    
+
     .section-header {
         font-size: 1.8rem !important;
         letter-spacing: 1.5px !important;
@@ -141,18 +209,18 @@ html {
     .navbar-nav {
         gap: 0.8rem !important;
     }
-    
+
     .navbar-dark .navbar-nav .nav-link {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         letter-spacing: 0.5px;
         margin: 0 0.3rem;
     }
-    
+
     .section-header {
         font-size: 1.5rem !important;
         letter-spacing: 1px !important;
     }
-    
+
     #hero-section .display-4 {
         font-size: 2.2rem;
         letter-spacing: 2px;
@@ -165,29 +233,58 @@ html {
         gap: 0.5rem !important;
         justify-content: center !important;
     }
-    
+
     .navbar-dark .navbar-nav .nav-link {
-        font-size: 0.8rem;
+        font-size: 1.1rem;
         padding: 0.3rem !important;
     }
 }
 
-/* Prevent horizontal overflow on the whole project section */
-#projects-section {
-    overflow-x: hidden;
-}
-
-/* Force all images to be responsive globally */
-.card-img-top {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 250px; /* Slightly shorter for mobile looks better */
-    object-fit: cover;
-}
-
-/* On desktop, keep your preferred height */
 @media (min-width: 768px) {
     .card-img-top {
         max-height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        display: flex !important;
+        justify-content: center !important;
+        width: auto !important;
+        flex-direction: row !important;
+        gap: 4rem !important;
+    }
+
+    .navbar-collapse {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .navbar-brand {
+        margin-right: 0 !important;
+        margin-left: 3rem !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 !important;
+        z-index: 10;
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+        width: 100% !important;
+        padding: 2rem 0 !important;
+        background-color: #343a40;
+        margin-top: 1rem;
     }
 }
