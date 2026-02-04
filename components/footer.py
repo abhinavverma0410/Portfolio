@@ -19,7 +19,7 @@ def create_footer():
                             className="footer-link lead mb-3 mb-md-0 me-md-4"),
                     
                     html.A([html.I(className="bi bi-envelope-fill me-2"), "abhinavverma1005@gmail.com"], 
-                            href="mailto:abhinavverma1005@gmail.com", 
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=abhinavverma1005@gmail.com", 
                             className="footer-link lead mb-3 mb-md-0"),
                     ], className="d-flex flex-column flex-md-row justify-content-center align-items-center mb-4"),
 
