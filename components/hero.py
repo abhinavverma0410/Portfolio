@@ -37,16 +37,19 @@ def create_hero():
                 ),
                 
                 html.Div([
-                    dbc.Button("View My Work", color="primary", 
-                                href="#projects-section", size="lg", 
-                                className="me-3 mb-2"),
+                    dbc.Button(
+                        "View My Work", color="primary", 
+                        href="#projects-section", size="lg", 
+                        className="me-3 mb-2",
+                        style={"width": "220px"}),
                     dbc.Button(
                         [html.I(className="bi bi-file-earmark-pdf-fill me-2"), "Download CV"], 
                         color="outline-primary", 
                         size="lg", 
                         href="/assets/Abhinav Resume.pdf",
                         external_link=True,
-                        className="mb-2"
+                        className="me-3 mb-2 d-inline-flex align-items-center justify-content-center",
+                        style={"width": "220px"}
                     )
                 ], className="text-center")
                 
