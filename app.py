@@ -18,7 +18,6 @@ app = Dash(
 
 server = app.server
 
-# Custom Hamburger Menu (Prevents auto-close on click)
 hamburger_menu = html.Div(
     [
         dbc.Button(
@@ -66,8 +65,6 @@ app.layout = html.Div([
     )
 ])
 
-# 1. Callback to toggle the dropdown ONLY when the hamburger button is clicked,
-#    and conditionally close it ONLY if navigating to a different section.
 @app.callback(
     Output("hamburger-collapse", "is_open"),
     [Input("hamburger-btn", "n_clicks"),
@@ -88,11 +85,9 @@ def toggle_menu(btn, p, e, s, pr, c, is_open, class_p, class_e, class_s, class_p
     trigger_id = ctx.triggered_id
     
     if trigger_id == "hamburger-btn":
-        # Toggle menu if the hamburger button is clicked
         return not is_open
         
     elif trigger_id:
-        # Map the clicked link to its current class name State to avoid the URL race condition.
         class_mapping = {
             "link-profile": class_p,
             "link-experience": class_e,
@@ -103,15 +98,13 @@ def toggle_menu(btn, p, e, s, pr, c, is_open, class_p, class_e, class_s, class_p
         
         clicked_class = class_mapping.get(trigger_id, "")
         
-        # If the clicked link ALREADY has the active class, we are currently on this section.
         if "active-nav-item" in clicked_class:
-            return is_open # Do not close the dropdown
+            return is_open
         else:
-            return False   # Navigating to a new section, close the dropdown
+            return False
             
     return is_open
 
-# 2. Callback to dynamically update active link styling based on URL hash
 @app.callback(
     [Output("link-profile", "className"),
      Output("link-experience", "className"),
@@ -121,22 +114,17 @@ def toggle_menu(btn, p, e, s, pr, c, is_open, class_p, class_e, class_s, class_p
     [Input("url", "href")]
 )
 def update_active_links(href):
-    # Parse the current section hash from the URL
     hash_val = ""
     if href and "#" in href:
         hash_val = "#" + href.split("#")[-1]
         
-    # Define the base, active, and inactive CSS classes
     base_class = "custom-nav-link text-decoration-none px-4 py-2 rounded-3 transition-all d-block"
     
-    # Replaced the heavy dark classes with a subtle custom active class
     active_class = base_class + " active-nav-item"
     inactive_class = base_class + " text-dark hover-bg-light"
 
-    # Default all to inactive
     p, e, s, pr, c = inactive_class, inactive_class, inactive_class, inactive_class, inactive_class
     
-    # Apply active styling based on current route
     if hash_val == "#experience-section":
         e = active_class
     elif hash_val == "#skills-section":
@@ -146,7 +134,7 @@ def update_active_links(href):
     elif hash_val == "#contact-section":
         c = active_class
     else:
-        p = active_class # Defaults to Profile on initial load or empty hash
+        p = active_class
         
     return p, e, s, pr, c
 
