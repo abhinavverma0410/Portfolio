@@ -1,92 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // The exact IDs of your portfolio layout sections
+    const sectionIds = ['hero-section', 'experience-section', 'skills-section', 'projects-section', 'contact-section'];
     
-    let isScrollingManual = false;
-    let scrollTimeout = null;
+    // Flag to pause observer during click-based smooth scrolling
+    let isClickScrolling = false;
 
-    function updateActiveState() {
-        if (isScrollingManual) return;
-
-        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-        const sections = document.querySelectorAll('[id$="-section"]');
-        const scrollPosition = window.scrollY + 150;
-
-        let currentSectionId = '';
-
-        if (window.scrollY < 50) {
-            currentSectionId = '#hero-section';
-        } 
-        else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
-            currentSectionId = '#contact-section';
-        } 
-        else {
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 150;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    currentSectionId = `#${section.id}`;
-                }
-            });
-        }
-
-        if (currentSectionId) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentSectionId) {
-                    link.classList.add('active');
-                }
-            });
-
-            if (history.replaceState && window.location.hash !== currentSectionId) {
-                history.replaceState(null, null, currentSectionId);
-            }
-        }
-    }
-
+    // 1. Global Click Listener (Handles Outside Clicks & Link Tracking)
     document.addEventListener('click', function(e) {
-        const targetLink = e.target.closest('a[href^="#"]');
         
-        if (targetLink) {
-            e.preventDefault();
-            isScrollingManual = true;
+        // --- NEW: Click-Away Logic ---
+        const hamburgerWrapper = document.querySelector('.fixed-hamburger-wrapper');
+        const collapseMenu = document.getElementById('hamburger-collapse');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
 
-            const targetId = targetLink.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                if(history.pushState) {
-                    history.pushState(null, null, targetId);
+        // Check if the click happened outside the menu wrapper entirely
+        if (hamburgerWrapper && !hamburgerWrapper.contains(e.target)) {
+            // Check if the menu is currently expanded/open
+            if (collapseMenu && collapseMenu.classList.contains('show')) {
+                // Programmatically click the toggle button to let Dash safely close it
+                if (hamburgerBtn) {
+                    hamburgerBtn.click();
                 }
-
-                const navbarHeight = 70; 
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-
-                document.querySelectorAll('.navbar-nav .nav-link').forEach(l => l.classList.remove('active'));
-                targetLink.classList.add('active');
-
-                setTimeout(() => {
-                    isScrollingManual = false;
-                }, 800);
             }
+        }
+        // -----------------------------
+
+        // --- EXISTING: Dropdown link click tracking ---
+        const targetLink = e.target.closest('.custom-nav-link');
+        if (targetLink) {
+            isClickScrolling = true;
+            setTimeout(() => { isClickScrolling = false; }, 800); // Re-enable tracking after scroll
         }
     });
 
+    // 2. Setup Intersection Observer
+    const observerOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px', 
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        if (isClickScrolling) return; // Ignore intersections if clicking a link
+
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const currentSectionId = `#${entry.target.id}`;
+                
+                // Only act if the hash is actually changing
+                if (window.location.hash !== currentSectionId) {
+                    history.replaceState(null, null, currentSectionId);
+                    // Fire a popstate event to trigger Dash's dcc.Location callback
+                    window.dispatchEvent(new Event('popstate'));
+                }
+            }
+        });
+    }, observerOptions);
+
+    // 3. Wait for Dash to load the DOM, then attach the observer
     const initInterval = setInterval(() => {
-        const nav = document.querySelector('.navbar-nav');
-        if (nav) {
-            console.log("Navbar detected. Initializing URL-updater script...");
-            window.addEventListener('scroll', () => {
-                if (scrollTimeout) clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(updateActiveState, 50);
-            });
-            updateActiveState();
+        const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+        
+        if (sections.length === sectionIds.length) {
+            sections.forEach(section => observer.observe(section));
             clearInterval(initInterval);
+            console.log("Scroll tracking and click-away initialized successfully.");
         }
-    }, 100);
+    }, 250); 
 });
