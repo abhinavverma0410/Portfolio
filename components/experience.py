@@ -23,11 +23,11 @@ def create_experience():
             "desc": "Working on real-time ML projects, model tuning, and pipeline automation using Python and Scikit-learn."
         },
         {
-            "role": "Data Science Tainee",
+            "role": "Data Science Trainee",
             "company": "Ansh Infotech Pvt. Ltd.",
             "location": "Ludhiana, Punjab",
             "date": "June 2024 - July 2025",
-            "desc": "Built and deployed a Sentiment Analysis syst"
+            "desc": "Conducted Data cleaning, analysis, and modeling. Built data pipelines and visualization dashboards."
         },
         {
             "role": "Python Developer Trainee",
