@@ -13,7 +13,7 @@ def create_hero():
         
         dbc.Row([
             dbc.Col([
-                html.H1(["Hi, I'm ", html.B("Abhinav Verma")], 
+                html.H1(["Hi, I'm ",html.Br() ,html.B("Abhinav Verma")], 
                         className="display-5 fw-bold text-center mb-3"),
                 
                 html.P("Machine Learning Engineer | Data Scientist", 
