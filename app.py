@@ -1,6 +1,8 @@
 from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 
+import os
+
 from components.hero import create_hero
 from components.experience import create_experience
 from components.skills import create_skills
@@ -139,4 +141,6 @@ def update_active_links(href):
     return p, e, s, pr, c
 
 if __name__ == "__main__":
-    app.run(debug=True, dev_tools_hot_reload=False)
+    port = int(os.environ.get("PORT", 8050))
+    
+    app.run(host="0.0.0.0", port=port, debug=False)
