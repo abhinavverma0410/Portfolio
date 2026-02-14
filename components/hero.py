@@ -3,7 +3,6 @@ import dash_bootstrap_components as dbc
 
 def create_hero():
     layout = dbc.Container([
-        
         dbc.Row([
             dbc.Col([
                 html.Div([
@@ -51,4 +50,5 @@ def create_hero():
             
         ], className="align-items-center pb-5")
     ], fluid=True, id="hero-section", className="px-3 px-md-5", style={"paddingTop": "120px"})
+    
     return layout
