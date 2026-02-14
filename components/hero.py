@@ -32,7 +32,8 @@ def create_hero():
                 html.Div([
                     dbc.Button(
                         "View My Work", color="primary", 
-                        href="#projects-section", size="lg", 
+                        href="#projects-section", size="lg",
+                        external_link=True,
                         className="me-3 mb-2",
                         style={"width": "220px"}),
                     dbc.Button(
